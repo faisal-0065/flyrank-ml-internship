@@ -1,1 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Content Performance Opportunity Scoring | Muhammad Faisal</title>
+
+<meta name="description"
+      content="A research study on content performance opportunity scoring using search visibility and engagement signals.">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #f5f7fa;
+    color: #172033;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+}
+
+a {
+    color: #2563eb;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: auto;
+}
+
+/* Header */
+
+.hero {
+    background: linear-gradient(135deg, #111827, #1e3a8a);
+    color: white;
+    padding: 90px 0 75px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.hero h1 {
+    max-width: 900px;
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.05;
+    margin: 25px 0;
+}
+
+.hero p {
+    max-width: 780px;
+    color: #dbeafe;
+    font-size: 19px;
+}
+
+.author {
+    margin-top: 30px;
+    color: #bfdbfe;
+}
+
+/* Navigation */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-inner {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 13px 0;
+}
+
+nav a {
+    white-space: nowrap;
+    text-decoration: none;
+    color: #374151;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #2563eb;
+}
+
+/* Sections */
+
+section {
+    padding: 70px 0;
+}
+
+section:nth-child(even) {
+    background: white;
+}
+
+h2 {
+    font-size: 34px;
+    margin-top: 0;
+    color: #111827;
+}
+
+h3 {
+    color: #1f2937;
+    margin-top: 35px;
+}
+
+.lead {
+    font-size: 19px;
+    color: #4b5563;
+}
+
+/* Cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    margin: 30px 0;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 5px 18px rgba(15,23,42,0.05);
+}
+
+.card strong {
+    display: block;
+    font-size: 30px;
+    color: #1d4ed8;
+    margin-bottom: 5px;
+}
+
+.card span {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Tables */
+
+.table-wrap {
+    overflow-x: auto;
+    margin: 25px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+th {
+    background: #111827;
+    color: white;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Highlight */
+
+.highlight {
+    background: #eff6ff;
+    border-left: 5px solid #2563eb;
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin: 25px 0;
+}
+
+.warning {
+    background: #fff7ed;
+    border-left: 5px solid #f97316;
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin: 25px 0;
+}
+
+/* Feature list */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.feature {
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 15px;
+    border-radius: 10px;
+    font-family: monospace;
+}
+
+/* Bars */
+
+.bar-row {
+    margin: 20px 0;
+}
+
+.bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.bar {
+    height: 18px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 20px;
+}
+
+/* Footer */
+
+footer {
+    background: #111827;
+    color: #cbd5e1;
+    padding: 50px 0;
+}
+
+footer a {
+    color: #93c5fd;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+
+    section {
+        padding: 50px 0;
+    }
+
+    .hero {
+        padding: 65px 0;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .card strong {
+        font-size: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<header class="hero">
+<div class="container">
+
+<span class="badge">
+SEARCH INTELLIGENCE · ML RESEARCH
+</span>
+
+<h1>
+Content Performance Opportunity Scoring
+</h1>
+
+<p>
+A decision-support analysis for identifying content that may deserve
+search-visibility review, monitoring, or CTR/metadata review using
+observed search and engagement signals.
+</p>
+
+<div class="author">
+<strong>Author:</strong> Muhammad Faisal<br>
+<strong>Lane:</strong> Refresh / Content Opportunity Scoring
+</div>
+
+</div>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+<div class="container nav-inner">
+<a href="#abstract">Abstract</a>
+<a href="#problem">Problem</a>
+<a href="#data">Data</a>
+<a href="#methodology">Methodology</a>
+<a href="#results">Results</a>
+<a href="#limitations">Limitations</a>
+<a href="#recommendations">Recommendations</a>
+<a href="#reproducibility">Reproducibility</a>
+<a href="#credit">Data Credit</a>
+</div>
+</nav>
+
+
+<!-- ABSTRACT -->
+
+<section id="abstract">
+<div class="container">
+
+<h2>Abstract</h2>
+
+<p class="lead">
+This study asks whether observed search and engagement signals can be
+used to rank content items for editorial review and monitoring.
+Using 30,000 anonymized content items from the FlyRank ML Internship
+dataset, the analysis uses nine non-identifier features and a
+client-held-out evaluation design. A Logistic Regression model was
+compared with a transparent CTR-based baseline and evaluated using
+precision, recall, F1, and ROC-AUC. At a decision threshold of 0.10,
+the model achieved an F1 score of 0.2983 and recall of 0.9009,
+compared with an F1 score of 0.1703 and recall of 0.1535 for the
+baseline. The resulting ranking is intended as decision-support for
+prioritizing content review rather than as causal evidence or a claim
+about any search-engine ranking algorithm.
+</p>
+
+</div>
+</section>
+
+
+<!-- PROBLEM -->
+
+<section id="problem">
+<div class="container">
+
+<h2>1. Problem Statement</h2>
+
+<p>
+Content teams often have many pages that could potentially be reviewed,
+but limited time to inspect every page individually. The practical
+question is therefore not simply whether a page performs well or poorly,
+but which pages should receive attention first.
+</p>
+
+<div class="highlight">
+
+<strong>Research question:</strong>
+
+Can observed search visibility, traffic, and engagement signals be used
+to rank content items for practical review and monitoring?
+</div>
+
+<h3>Decision supported</h3>
+
+<p>
+The output supports an editorial prioritization decision: which content
+items should be reviewed for search visibility, reviewed for CTR or
+metadata, or monitored.
+</p>
+
+<h3>Unit of analysis</h3>
+
+<p>
+The unit of analysis is an individual content item.
+</p>
+
+<h3>Human action</h3>
+
+<p>
+An editor or analyst can use the ranked output as a review queue,
+starting with higher-scored content and examining the associated reason
+code before deciding what action is appropriate.
+</p>
+
+<h3>Cost of a wrong call</h3>
+
+<p>
+A false positive can waste editorial time on a page that does not need
+attention. A false negative can cause a potentially useful review
+opportunity to be missed. Because of this trade-off, the model is used
+for prioritization rather than automatic publishing or deletion.
+</p>
+
+</div>
+</section>
+
+
+<!-- DATA -->
+
+<section id="data">
+<div class="container">
+
+<h2>2. Data</h2>
+
+<p>
+The analysis used the anonymized content-performance dataset available
+in the internship repository.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<strong>30,000</strong>
+<span>Content items</span>
+</div>
+
+<div class="card">
+<strong>32</strong>
+<span>Pseudonymous clients</span>
+</div>
+
+<div class="card">
+<strong>44</strong>
+<span>Original columns</span>
+</div>
+
+<div class="card">
+<strong>9</strong>
+<span>Model features</span>
+</div>
+
+</div>
+
+<h3>Dataset characteristics</h3>
+
+<p>
+The dataset contains search-volume, competition, content, traffic,
+visibility, engagement, and trend-related fields. The analysis focused
+on measurable content and search-performance signals that could be used
+without exposing client-identifying information.
+</p>
+
+<h3>Important observed values</h3>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Observed value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Total content items</td>
+<td>30,000</td>
+</tr>
+
+<tr>
+<td>Unique clients</td>
+<td>32</td>
+</tr>
+
+<tr>
+<td>Average 90-day impressions</td>
+<td>5,200.37</td>
+</tr>
+
+<tr>
+<td>Average 90-day clicks</td>
+<td>16.1</td>
+</tr>
+
+<tr>
+<td>Positive target cases</td>
+<td>4,388</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3>Excluded fields</h3>
+
+<p>
+The following fields were excluded from the model because they are
+identifiers, target-derived fields, or potential leakage sources:
+</p>
+
+<div class="feature-grid">
+
+<div class="feature">content_id</div>
+<div class="feature">client_id</div>
+<div class="feature">trend_direction</div>
+<div class="feature">trend_pct</div>
+<div class="feature">performance_positive</div>
+
+</div>
+
+<div class="warning">
+
+<strong>Leakage check: PASS.</strong>
+
+The model did not use the excluded leakage or identifier columns.
+Pseudonymous client IDs were used only to create the held-out client
+split, not as model features.
+</div>
+
+</div>
+</section>
+
+
+<!-- METHODOLOGY -->
+
+<section id="methodology">
+<div class="container">
+
+<h2>3. Methodology</h2>
+
+<h3>Features</h3>
+
+<p>
+Nine numeric features were used as model inputs:
+</p>
+
+<div class="feature-grid">
+
+<div class="feature">impressions_90d</div>
+<div class="feature">clicks_90d</div>
+<div class="feature">pageviews_90d</div>
+<div class="feature">sessions_90d</div>
+<div class="feature">avg_position</div>
+<div class="feature">ctr</div>
+<div class="feature">engagement_rate</div>
+<div class="feature">scroll_rate</div>
+<div class="feature">ai_traffic_pct</div>
+
+</div>
+
+<h3>Target definition</h3>
+
+<p>
+The target was a binary <strong>performance_positive</strong> label,
+with the positive class containing 4,388 of the 30,000 content items.
+</p>
+
+<h3>Baseline</h3>
+
+<p>
+The baseline used a transparent CTR rule. It provided a simple,
+interpretable reference point against which the Logistic Regression
+model could be evaluated.
+</p>
+
+<h3>Validation design</h3>
+
+<p>
+The evaluation used a client-held-out split. The training data contained
+23,837 rows from 25 clients, while the test data contained 6,163 rows
+from 7 clients.
+</p>
+
+<div class="highlight">
+
+<strong>Client overlap: 0.</strong>
+
+No clients were shared between the training and testing sets. This makes
+the evaluation more conservative than randomly mixing content from the
+same clients across both sets.
+</div>
+
+<h3>Decision threshold</h3>
+
+<p>
+The model's default threshold of 0.50 produced very few positive
+predictions. Threshold analysis showed a more useful operating point
+at 0.10, where recall increased substantially.
+</p>
+
+</div>
+</section>
+
+
+<!-- RESULTS -->
+
+<section id="results">
+<div class="container">
+
+<h2>4. Results</h2>
+
+<p class="lead">
+The Logistic Regression model and CTR baseline were evaluated on the
+same held-out test set.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Metric</th>
+<th>CTR Baseline</th>
+<th>Logistic Regression</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Accuracy</td>
+<td>0.7501</td>
+<td>0.2922</td>
+</tr>
+
+<tr>
+<td>Precision</td>
+<td>0.1911</td>
+<td>0.1787</td>
+</tr>
+
+<tr>
+<td>Recall</td>
+<td>0.1535</td>
+<td>0.9009</td>
+</tr>
+
+<tr>
+<td>F1</td>
+<td><strong>0.1703</strong></td>
+<td><strong>0.2983</strong></td>
+</tr>
+
+<tr>
+<td>ROC-AUC</td>
+<td>—</td>
+<td>0.5914</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<h3>F1 comparison</h3>
+
+<div class="bar-row">
+
+<div class="bar-label">
+<span>CTR Baseline</span>
+<span>0.1703</span>
+</div>
+
+<div class="bar">
+<div class="bar-fill" style="width:57%"></div>
+</div>
+
+</div>
+
+<div class="bar-row">
+
+<div class="bar-label">
+<span>Logistic Regression</span>
+<span>0.2983</span>
+</div>
+
+<div class="bar">
+<div class="bar-fill" style="width:100%"></div>
+</div>
+
+</div>
+
+
+<h3>Threshold analysis</h3>
+
+<p>
+The threshold analysis showed a clear precision-recall trade-off.
+At threshold 0.10, the model predicted 5,187 positive cases and
+achieved 0.1787 precision, 0.9009 recall, and 0.2983 F1.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Threshold</th>
+<th>Predicted Positive</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>0.10</td>
+<td>5,187</td>
+<td>0.1787</td>
+<td>0.9009</td>
+<td><strong>0.2983</strong></td>
+</tr>
+
+<tr>
+<td>0.15</td>
+<td>1,652</td>
+<td>0.2197</td>
+<td>0.3528</td>
+<td>0.2708</td>
+</tr>
+
+<tr>
+<td>0.20</td>
+<td>779</td>
+<td>0.2555</td>
+<td>0.1934</td>
+<td>0.2201</td>
+</tr>
+
+<tr>
+<td>0.30</td>
+<td>261</td>
+<td>0.3257</td>
+<td>0.0826</td>
+<td>0.1318</td>
+</tr>
+
+<tr>
+<td>0.50</td>
+<td>10</td>
+<td>0.2000</td>
+<td>0.0019</td>
+<td>0.0038</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<h3>Error analysis</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Error type</th>
+<th>Count</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>True Positive</td>
+<td>927</td>
+</tr>
+
+<tr>
+<td>True Negative</td>
+<td>874</td>
+</tr>
+
+<tr>
+<td>False Positive</td>
+<td>4,260</td>
+</tr>
+
+<tr>
+<td>False Negative</td>
+<td>102</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="warning">
+
+The high number of false positives is important. The model is useful
+for finding a broad review set at the selected threshold, but its
+predictions should not be treated as automatic decisions.
+</div>
+
+</div>
+</section>
+
+
+<!-- LIMITATIONS -->
+
+<section id="limitations">
+<div class="container">
+
+<h2>5. Limitations & Honest Framing</h2>
+
+<p>
+This work describes observed relationships in the available dataset.
+It does not establish causal relationships.
+</p>
+
+<h3>What the analysis can say</h3>
+
+<ul>
+<li>Observed signals were associated with the measured target.</li>
+<li>The model can rank content items according to its learned score.</li>
+<li>The output can support editorial prioritization.</li>
+<li>The evaluation provides a directional comparison with a simple baseline.</li>
+</ul>
+
+<h3>What the analysis cannot say</h3>
+
+<ul>
+<li>It does not prove that changing a page will cause a ranking improvement.</li>
+<li>It does not prove Google's ranking algorithm or any search-engine algorithm.</li>
+<li>It does not establish that a recommended action will cause traffic growth.</li>
+<li>It should not be interpreted as an automatic publish, rewrite, merge, or prune decision.</li>
+</ul>
+
+<div class="warning">
+
+<strong>Important:</strong>
+
+The model has a modest ROC-AUC of 0.5914 and produces many false
+positives at the selected threshold. Therefore, the output should be
+treated as a prioritization and decision-support tool rather than a
+high-confidence classifier.
+</div>
+
+</div>
+</section>
+
+
+<!-- RECOMMENDATIONS -->
+
+<section id="recommendations">
+<div class="container">
+
+<h2>6. Ranked Recommendations</h2>
+
+<p class="lead">
+The model output was translated into practical editorial review
+categories.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<strong>1,726</strong>
+<span>Review search visibility</span>
+</div>
+
+<div class="card">
+<strong>1,710</strong>
+<span>Monitor</span>
+</div>
+
+<div class="card">
+<strong>537</strong>
+<span>Review CTR / metadata</span>
+</div>
+
+</div>
+
+<h3>Action distribution</h3>
+
+<div class="bar-row">
+
+<div class="bar-label">
+<span>Review search visibility</span>
+<span>1,726</span>
+</div>
+
+<div class="bar">
+<div class="bar-fill" style="width:100%"></div>
+</div>
+
+</div>
+
+<div class="bar-row">
+
+<div class="bar-label">
+<span>Monitor</span>
+<span>1,710</span>
+</div>
+
+<div class="bar">
+<div class="bar-fill" style="width:99%"></div>
+</div>
+
+</div>
+
+<div class="bar-row">
+
+<div class="bar-label">
+<span>Review CTR / metadata</span>
+<span>537</span>
+</div>
+
+<div class="bar">
+<div class="bar-fill" style="width:31%"></div>
+</div>
+
+</div>
+
+
+<h3>Suggested action playbook</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Priority</th>
+<th>Recommended action</th>
+<th>Reason</th>
+<th>Human follow-up</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>1</td>
+<td><strong>Review search visibility</strong></td>
+<td>Weak search position or low visibility signals</td>
+<td>Inspect search visibility and content relevance before deciding on an update.</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td><strong>Monitor</strong></td>
+<td>Multiple signals suggest an opportunity but do not justify an immediate change</td>
+<td>Track performance and reassess using future observations.</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td><strong>Review CTR / metadata</strong></td>
+<td>Visibility is present but click capture is relatively weak</td>
+<td>Review title, description, search intent alignment, and presentation.</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p>
+These recommendations are intended as a starting queue for human review.
+They do not prescribe an automatic content change.
+</p>
+
+</div>
+</section>
+
+
+<!-- ARTIFACTS -->
+
+<section id="artifacts">
+<div class="container">
+
+<h2>7. Artifacts</h2>
+
+<p>
+The analysis produced three main visual artifacts for the research
+paper:
+</p>
+
+<ol>
+<li>Model-versus-baseline F1 comparison.</li>
+<li>Decision-threshold precision, recall, and F1 analysis.</li>
+<li>Distribution of recommended editorial actions.</li>
+</ol>
+
+<p>
+The accompanying tables on this page reproduce the key numerical
+results used to interpret those artifacts.
+</p>
+
+</div>
+</section>
+
+
+<!-- REPRODUCIBILITY -->
+
+<section id="reproducibility">
+<div class="container">
+
+<h2>8. Reproducibility</h2>
+
+<p>
+The analysis was developed in Google Colab using Python, pandas,
+NumPy, scikit-learn, and Matplotlib.
+</p>
+
+<h3>Evaluation setup</h3>
+
+<ul>
+
+<li>
+Training set: <strong>23,837 rows</strong> from 25 clients.
+</li>
+
+<li>
+Testing set: <strong>6,163 rows</strong> from 7 clients.
+</li>
+
+<li>
+Client overlap: <strong>0</strong>.
+</li>
+
+<li>
+Model: Logistic Regression.
+</li>
+
+<li>
+Final decision threshold: <strong>0.10</strong>.
+</li>
+
+<li>
+Leakage check: <strong>PASS</strong>.
+</li>
+
+</ul>
+
+<h3>Model inputs</h3>
+
+<p>
+The model used nine numeric features:
+</p>
+
+<p>
+<code>
+impressions_90d,
+clicks_90d,
+pageviews_90d,
+sessions_90d,
+avg_position,
+ctr,
+engagement_rate,
+scroll_rate,
+ai_traffic_pct
+</code>
+</p>
+
+<h3>Excluded inputs</h3>
+
+<p>
+The model excluded content identifiers, client identifiers, the target,
+and trend-derived fields that could introduce leakage.
+</p>
+
+<h3>Randomness</h3>
+
+<p>
+No explicit random seed was recorded in the notebook. Therefore, this
+paper reports the results of the recorded run rather than claiming
+bit-for-bit reproducibility.
+</p>
+
+<p>
+The complete capstone notebook and supporting work are maintained in
+the project repository.
+</p>
+
+</div>
+</section>
+
+
+<!-- DATA CREDIT -->
+
+<section id="credit">
+<div class="container">
+
+<h2>9. Acknowledgments & Data Credit</h2>
+
+<p>
+Built on the
+<a href="https://flyrank.ai"
+   target="_blank"
+   rel="noopener noreferrer">
+FlyRank ML Internship dataset
+</a>.
+</p>
+
+<p>
+The dataset was used for educational research and decision-support
+analysis within the internship project.
+</p>
+
+</div>
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container">
+
+<h3 style="color:white;">
+Content Performance Opportunity Scoring
+</h3>
+
+<p>
+Muhammad Faisal · Refresh / Content Opportunity Scoring
+</p>
+
+<p>
+This research presents observed, measured, and directional evidence.
+It is not causal proof and does not claim to predict or explain any
+search engine's ranking algorithm.
+</p>
+
+<p>
+© 2026 Muhammad Faisal
+</p>
+
+</div>
+
+</footer>
+
+</body>
+</html>
